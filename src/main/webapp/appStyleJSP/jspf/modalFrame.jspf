@@ -1,0 +1,228 @@
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%--新建项目模态框--%>
+<div class="modal fade" id="newProjectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="newProjectModalTitle">
+          新建**项目
+        </h4>
+      </div>
+      <div class="modal-body">
+        <%--输入框组--%>
+        <div class="input-group">
+          <span class="input-group-addon">项目名：</span>
+          <input type="text" class="form-control" placeholder="请输入项目名称" id="projectNameModal">
+        </div>
+        <br>
+        <div class="input-group">
+          <span class="input-group-addon">备  注：</span>
+          <input type="text" class="form-control" placeholder="请输入备注" id="projectRemarkModal">
+        </div><br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+        </button>
+        <button type="button" class="btn btn-primary" onclick="addProject()" id="addProButton">
+          确认
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<%--删除项目模态框--%>
+<div class="modal fade" id="deleteProject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-head" style=" text-align:center;">
+        <h4>项目删除后将无法恢复，真的要删除吗？<br></h4>
+        <h4> 取消请点击“关闭”，删除请点击“确认”</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+        </button>
+        <button type="button" class="btn btn-primary" onclick="removeProject();" id="deleteButton">
+          确认
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">鱼骨图App使用说明:</h2>
+      </div>
+      <div class="modal-body">
+        本WebApp提供两种绘制鱼骨图方法：<br /> 1、使用模板<br />
+        &nbsp;&nbsp;&nbsp;1)点击“下载模板”，获取标准模板；<br />
+        &nbsp;&nbsp;&nbsp;2)填写待解决问题以及问题原因；<br /> &nbsp;&nbsp;&nbsp;<img
+            src="./template/img/reasonAnasis.png" width="400px" height="200px">
+        <br /> &nbsp;&nbsp;&nbsp;3)删除模板中多余数据；<br />
+        &nbsp;&nbsp;&nbsp;4)点击绘制按钮，绘制鱼骨图；<br />
+        &nbsp;&nbsp;&nbsp;5)选中节点，点击上方的功能按钮，可是实现对内容的修改，点击绘制可得到修改后的鱼骨图；<br />
+        &nbsp;&nbsp;&nbsp;6)点击居中，并保存图片；<br /> 2、在侧边栏交互编辑<br />
+        &nbsp;&nbsp;&nbsp;1)编辑待解决问题；<br />
+        &nbsp;&nbsp;&nbsp;2)分别添加每一级的子节点，并编辑；<br />
+        &nbsp;&nbsp;&nbsp;3)点击绘制鱼骨图即可生成对应的鱼骨图；<br />
+        &nbsp;&nbsp;&nbsp;4)点击居中，并保存图片；<br /> 3、注意事项<br />
+        &nbsp;&nbsp;&nbsp;1)使用模板添加问题原因时，必须保持问题之间的层次结构（树状结构）；<br />
+        &nbsp;&nbsp;&nbsp;2)模板中每一行只能有一个数据；<br />
+        &nbsp;&nbsp;&nbsp;3)保存图片时，应先居中；<br />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 导入文件模态框 -->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">导入文件</h4>
+      </div>
+      <div class="modal-body"
+           style="padding-top: 50px; padding-bottom: 50px;">
+        <div id="chooseFile">
+          <input type="file" name="xlfile" id="xlf" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">确定
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 不允许添加模态框 -->
+<div class="modal fade" id="noAdd" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"
+           style="text-align: center; padding-top: 50px; padding-bottom: 50px; padding-left: 0px; padding-right: 0px;">
+        <h4 class="modal-title" id="myModalLabel">不允许添加子节点</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                style="padding-top: 5px; padding-bottom: 5px; padding-right: 10px; padding-left: 10px;">
+          确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 不允许编辑模态框 -->
+<div class="modal fade" id="noEdit" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"
+           style="text-align: center; padding-top: 50px; padding-bottom: 50px; padding-left: 0px; padding-right: 0px;">
+        <h4 class="modal-title" id="myModalLabel">不允许编辑该节点</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                style="padding-top: 5px; padding-bottom: 5px; padding-right: 10px; padding-left: 10px;">
+          确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 不允许删除模态框 -->
+<div class="modal fade" id="noDelete" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"
+           style="text-align: center; padding-top: 50px; padding-bottom: 50px; padding-left: 0px; padding-right: 0px;">
+        <h4 class="modal-title" id="myModalLabel">不允许删除该节点</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                style="padding-top: 5px; padding-bottom: 5px; padding-right: 10px; padding-left: 10px;">
+          确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 重绘-->
+<div class="modal fade" id="redraw" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"
+           style="text-align: center; padding-top: 50px; padding-bottom: 50px; padding-left: 0px; padding-right: 0px;">
+        <h4 class="modal-title" id="myModalLabel">
+          如果绘制将无法恢复原来的鱼骨图数据。</br> 确认绘制请点击“确认”按钮，否则点击“取消”按钮。
+        </h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                onclick="redraw()"
+                style="padding-top: 5px; padding-bottom: 5px; padding-right: 10px; padding-left: 10px;">
+          确定</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"
+                style="padding-top: 5px; padding-bottom: 5px; padding-right: 10px; padding-left: 10px;">
+          取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 新建-->
+<div class="modal fade" id="renew" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"
+           style="text-align: center; padding-top: 50px; padding-bottom: 50px; padding-left: 0px; padding-right: 0px;">
+        <h4 class="modal-title" id="myModalLabel">
+          如果新建将无法恢复原来的鱼骨图数据。</br> 确认重绘请点击“确认”按钮，否则点击“取消”按钮。
+        </h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                onclick="newFishbone()"
+                style="padding-top: 5px; padding-bottom: 5px; padding-right: 10px; padding-left: 10px;">
+          确定</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"
+                style="padding-top: 5px; padding-bottom: 5px; padding-right: 10px; padding-left: 10px;">
+          取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 确认删除-->
+<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"
+           style="text-align: center; padding-top: 50px; padding-bottom: 50px; padding-left: 0px; padding-right: 0px;">
+        <h4 class="modal-title" id="myModalLabel">
+          如果删除该节点，该节点的子节点也将会一起删除</br> 确认重绘请点击“确认”按钮，否则点击“取消”按钮。
+        </h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                onclick="removeTreeNode();"
+                style="padding-top: 5px; padding-bottom: 5px; padding-right: 10px; padding-left: 10px;">
+          确定</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"
+                style="padding-top: 5px; padding-bottom: 5px; padding-right: 10px; padding-left: 10px;">
+          取消</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+
+#buttonNew {
+    margin-bottom: 10px;
+}
+
+.tab-content {
+    border: 0px;
+    padding:5px;
+    /*padding-top: 5px*/
+}
+
+.helpClass {
+    margin: 0 auto;
+    width: 60%;
+}
+
+.helpP {
+    font-size: 16px;
+}
+#appHelp{
+    margin: 0 auto;
+    width: 80%;
+}

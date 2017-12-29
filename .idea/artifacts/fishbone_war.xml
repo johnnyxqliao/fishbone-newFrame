@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="fishbone:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="fishbone.war">
+      <element id="artifact" artifact-name="fishbone:war exploded" />
+    </root>
+  </artifact>
+</component>

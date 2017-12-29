@@ -1,0 +1,91 @@
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+  String basePath = "http://innovation.xjtu.edu.cn/StaticFiles/web-resources/frames/mes/1.0-SNAPSHOT/";
+  String appPath = "http://innovation.xjtu.edu.cn:80/InnovationToolsPlatform/";
+%>
+<div class="navbar navbar-default" id="navbar">
+  <div class="navbar-container" id="navbar-container">
+    <div class="navbar-header pull-left">
+      <a id="href0" href="http://innovation.xjtu.edu.cn/InnovationToolsPlatform/index" class="navbar-brand">
+        <small><i
+              class="fa fa-leaf"></i> 小微企业多创新方法融合与集成应用平台
+        </small>
+      </a>
+      <a id="href1" href="#" class="navbar-brand">
+        <small>
+          <small>
+            此处改为App名字PS:此处要加链接
+
+          </small>
+        </small>
+      </a>
+      <!-- /.brand -->
+    </div>
+    <!-- /.navbar-header -->
+    <div class="navbar-header pull-right" role="navigation">
+      <ul class="nav ace-nav" style="height: 20px;">
+        <li class="grey">
+          <a id="href2" data-toggle="dropdown" href="<%=basePath%>appList" onclick="gotoHref(this)"
+             class="dropdown-toggle"> <img class="nav-user-photo"
+                                           type="text/javascript" src="<%=basePath%>assets/avatars/platform.png"
+                                           alt="Jason's Photo"/>
+            平台主页
+          </a>
+        </li>
+
+
+        <li class="purple">
+          <a href="#" onclick="gotoHref(this)"
+          > <img class="nav-user-photo"
+                 type="text/javascript" src="<%=basePath%>assets/avatars/process.png" alt="Jason's Photo"/>
+            模板层
+
+          </a>
+
+        </li>
+        <li class="green">
+          <a data-toggle="dropdown" href="#"
+             class="dropdown-toggle"> <img class="nav-user-photo"
+                                           type="text/javascript" src="<%=basePath%>assets/avatars/tool.png"
+                                           alt="Jason's Photo"/>
+            工具集
+            </i>
+          </a>
+        </li>
+        <li class="light-blue">
+          <a data-toggle="dropdown" href="#"
+             class="dropdown-toggle"> <img id="userAvatar" class="nav-user-photo"
+                                           type="text/javascript" src="<%=basePath%>assets/avatars/avatar2.png"
+                                           alt="Jason's Photo"/> <span
+                class="user-info"> <small>欢迎光临,</small>
+                        <%
+                          Map<String, String> userInfo = (Map<String, String>) request.getSession().getAttribute("userInfo");
+                          if (userInfo == null) {
+                            out.println("匿名游客");
+                          } else {
+                            out.println(userInfo.get("username"));
+                          }
+                        %>
+						</span> <i class="icon-caret-down"></i>
+          </a>
+          <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+            <%
+              if (request.getSession().getAttribute("userInfo") == null) {
+            %>
+            <li><a href="#" onclick="gotoLogin()"> <i class="icon-key"></i>登录</a></li>
+            <li><a href="#" onclick="gotoRegister()"> <i class="icon-plus"></i>注册</a></li>
+            <%
+            } else {
+            %>
+            <li><a href="#" onclick="gotoUserInfo()"> <i class="icon-user"></i> 个人资料</a></li>
+            <li class="divider"></li>
+            <li><a href="#" onclick="logout()" style="cursor:pointer;"> <i class="icon-off"></i> 退出</a></li>
+            <%
+              }
+            %>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

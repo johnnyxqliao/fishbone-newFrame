@@ -1,0 +1,60 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: liaox
+  Date: 2017/12/19
+  Time: 10:27
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<div class="sidebar" id="sidebar-sec"
+     style="margin: 0 auto; width: 200px; background-color: #FFFFFF;">
+  <div class="btn-group btn-group-sm">
+    <button type="button" class="btn btn-default btn-success" onclick="updateNode()">
+      <span class="glyphicon glyphicon-edit"></span>编辑
+    </button>
+
+    <button type="button" class="btn btn-default btn-success" onclick="addTreeNode();">
+      <span class="glyphicon glyphicon-plus"></span>添加
+    </button>
+
+    <button type="button" class="btn btn-default btn-success" onclick="chooseDelete()">
+      <span class="glyphicon glyphicon-trash"></span>删除
+    </button>
+  </div>
+  <div class="zTreeDemoBackground left nav_wrap" id="sideTree">
+    <ul id="treeDemo" class="ztree nav_ul" style="padding-top: 0px;overflow-y: hidden;margin-top: 0px;"></ul>
+  </div>
+
+</div>
+<div class="bread-crumbs" id="breadcrumbs"
+     style="padding-right: 0px; border-bottom: 1px solid #cccccc;">
+  <div class="btn-group btn-group-sm" style="padding-left: 5px;padding-bottom: 2px;">
+
+    <button type="button" class="btn btn-default btn-success" onclick="downloadFile()">
+      <span class="menu-icon fa fa-download"></span>下载模板
+    </button>
+
+    <button type="button" class="btn btn-default btn-success" onclick="$('#myModal1').modal()">
+      <span class="glyphicon glyphicon-upload"></span>导入
+    </button>
+
+    <button type="button" class="btn btn-default btn-success" onclick="$('#redraw').modal()">
+      <span class="glyphicon glyphicon-ok"></span>绘制
+    </button>
+
+    <button type="button" class="btn btn-default btn-success" onclick="$('#renew').modal()">
+      <span class="menu-icon fa fa-folder"></span>新建
+    </button>
+
+    <button type="button" class="btn btn-default btn-success" onclick="setCenter()">
+      <span class="glyphicon glyphicon-align-center"></span>居中
+    </button>
+
+    <button type="button" class="btn btn-default btn-success" onclick="convertCanvasToImage()">
+      <span class="glyphicon glyphicon-check"></span>保存
+    </button>
+  </div>
+</div>
+<div id="canvasDiv">
+  <canvas id="canvas" width=500 height=500></canvas>
+</div>
