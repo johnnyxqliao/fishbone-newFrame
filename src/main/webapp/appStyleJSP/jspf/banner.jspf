@@ -58,14 +58,17 @@
                                            type="text/javascript" src="<%=basePath%>assets/avatars/avatar2.png"
                                            alt="Jason's Photo"/> <span
                 class="user-info"> <small>欢迎光临,</small>
-                        <%
-                          Map<String, String> userInfo = (Map<String, String>) request.getSession().getAttribute("userInfo");
-                          if (userInfo == null) {
-                            out.println("匿名游客");
-                          } else {
-                            out.println(userInfo.get("username"));
-                          }
-                        %>
+            <div class="username"><%
+              Map<String, String> userInfo = (Map<String, String>) request.getSession().getAttribute("userInfo");
+              if (userInfo == null) {
+                out.println("匿名用户");
+                out.println("<script>var userName ='anon';</script>");
+              } else {
+                out.println(userInfo.get("username"));
+                out.println("<script>var userName = $('.username')[0].innerText</script>");
+              }
+            %>
+            </div>
 						</span> <i class="icon-caret-down"></i>
           </a>
           <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">

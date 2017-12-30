@@ -82,10 +82,12 @@ zNodes[0].children.splice(6,1);
 var excelData = zNodes[0];
 
 var global_wb;
+var exportData = baseData;
 function process_wb(wb) {//数据转换
     global_wb = wb;
     var output = to_csv(wb);
     excelData = output.split("\n");
+    exportData = excelData;//用于导出文件
 	//将表格中获取的数据发送到前台界面
     excelData = init(excelData);
     excelData['open'] = true;

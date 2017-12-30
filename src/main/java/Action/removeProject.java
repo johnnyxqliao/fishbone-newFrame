@@ -13,8 +13,9 @@ import java.io.IOException;
 public class removeProject extends HttpServlet {
    protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       String projectId = request.getParameter("counter");
-      System.out.println("项目id是："+projectId);
-      DaoDB.remove(Integer.valueOf(projectId));
+      String username = request.getParameter("username");
+      System.out.println("项目id是："+projectId+"用户名是："+username);
+      DaoDB.remove(Integer.valueOf(projectId),username);
    }
 
    protected void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

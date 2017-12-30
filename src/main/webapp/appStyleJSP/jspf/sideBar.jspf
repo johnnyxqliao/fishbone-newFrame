@@ -30,22 +30,22 @@
   </div>
   <ul class="nav nav-list">
     <li class="active" id="projectManagementBar">
-      <a data-toggle="tab" href="#projectManagement">
+      <a data-toggle="tab" href="#projectManagement" id="projectmanage">
         <i class="menu-icon fa fa-cogs"></i>
         <span class="menu-text">**项目管理</span>
       </a>
       <b class="arrow"></b>
     </li>
 
-    <li id="mainId">
-      <a data-toggle="tab" href="#mainFunction">
+    <li id="mainId" onclick="sideBarHide()">
+      <a data-toggle="tab" href="#mainFunction" id="main">
         <i class="menu-icon fa fa-tachometer"></i>
         <span class="menu-text">主功能界面</span>
       </a>
       <b class="arrow"></b>
     </li>
 
-    <li>
+    <li onclick="sideBarHide()">
       <a data-toggle="tab" href="#wordEdit">
         <i class="menu-icon fa fa-pencil-square-o"></i>
         <span class="menu-text">word编辑区</span>
@@ -64,6 +64,7 @@
   </ul>
   <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
     <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state"
-       data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right" onclick="cavansAdpt();"></i>
+       data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"
+       onclick="cavansAdpt();"></i>
   </div>
 </div>

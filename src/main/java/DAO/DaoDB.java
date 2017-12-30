@@ -11,21 +11,20 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class DaoDB {
-   private static Configuration config = null;
-   private static SessionFactory sessionFactory = null;
-   private static Session session = null;
-   private static Transaction transaction = null;
+   private static Configuration config = new Configuration().configure("/hibernate.cfg.xml");
+   private static SessionFactory sessionFactory = config.buildSessionFactory();
+   private static Session session;
+   private static Transaction transaction;
    private static Gson gson = null;
 
-   public static void init () {
-      config = new Configuration().configure("/hibernate.cfg.xml");
+   private static void beginTransaction () {
       sessionFactory = config.buildSessionFactory();
       session = sessionFactory.openSession();
       transaction = session.beginTransaction();
    }
 
    public static void insert (FishboneEntity fishboneEntity) {//插入数据库
-      init();
+      beginTransaction();
       System.out.println("执行了一次插入操作");
       session.save(fishboneEntity);
       transaction.commit();
@@ -34,25 +33,68 @@ public class DaoDB {
       sessionFactory.close();
    }
 
-   public static void remove (Integer id) {//删除数据
+   public static void remove (Integer Id, String username) {//删除数据
       System.out.println("开始删除");
-      init();
-      FishboneEntity fishboneEntity = new FishboneEntity();
-      fishboneEntity.setProjectNumber(id);
-      session.delete(fishboneEntity);
+      beginTransaction();
+//      FishboneEntity fishboneEntity = new FishboneEntity();
+//      fishboneEntity.setProjectId(id);
+      String hql = "from FishboneEntity where projectId=? and userName=?";
+      Query query = session.createQuery(hql);
+      query.setString(0, String.valueOf(Id));
+      query.setString(1, username);
+      List<FishboneEntity> fishboneEntity = query.list();
+      session.delete(fishboneEntity.get(0));
       transaction.commit();
       session.close();
       System.out.println("删除成功");
    }
 
-   public static String query () {//查询数据
+   public static String query (String username) {//查询数据
+      beginTransaction();
       gson = new Gson();
-      init();
       System.out.println("开始查询");
-      Query query = session.createQuery("select fishboneEntity from FishboneEntity fishboneEntity");
+      String hql = "from FishboneEntity where userName=?";
+      Query query = session.createQuery(hql);
+      query.setString(0, username);
       List<FishboneEntity> fishboneEntity = query.list();
-      System.out.println(gson.toJson(fishboneEntity));
+      transaction.commit();
+      session.close();
+      System.out.println("查询结果是：" + gson.toJson(fishboneEntity));
       return gson.toJson(fishboneEntity);
+   }
+
+   public static void modify (String username, Integer Id, String result) {
+      beginTransaction();
+      System.out.println("开始修改");
+//      条件查询
+      String hql = "from FishboneEntity where projectId=? and userName=?";
+      Query query = session.createQuery(hql);
+      query.setString(0, String.valueOf(Id));
+      query.setString(1, username);
+      List<FishboneEntity> fishboneEntity = query.list();
+//      修改并更新数据
+      fishboneEntity.get(0).setResult(result);
+      session.update(fishboneEntity.get(0));
+      transaction.commit();
+      session.close();
+      System.out.println("modify successful");
+   }
+
+   public static String check (String username, Integer Id) {
+      beginTransaction();
+      System.out.println("开始查询");
+//      条件查询
+      String hql = "from FishboneEntity where projectId=? and userName=?";
+      Query query = session.createQuery(hql);
+      query.setString(0, String.valueOf(Id));
+      query.setString(1, username);
+      List<FishboneEntity> fishboneEntity = query.list();
+//      修改并更新数据
+      String checkData = fishboneEntity.get(0).getResult();
+      transaction.commit();
+      session.close();
+      System.out.println("check successful");
+      return checkData;
    }
 
    public static void main (String[] args) {
@@ -60,7 +102,10 @@ public class DaoDB {
 //      FishboneEntity fishboneEntity = new FishboneEntity(1, "asd", "asdf", "asdf");
 //      insert(fishboneEntity);
 //      remove (4);
-      query();
-      System.out.println("successful");
+//      query("from FishboneEntity fishboneEntity where userName="+"123");
+//      System.out.println(check ("123", 2));
+//      ;
+//      System.out.println("successful");
+      modify("123", 1, "asdfasd");
    }
 }

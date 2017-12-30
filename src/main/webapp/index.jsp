@@ -34,14 +34,14 @@
   <script type="text/javascript" src="<%=sourcePath%>/js/ace-elements.min.js"></script>
   <link rel="stylesheet" href="<%=sourcePath%>/css/fonts.googleapis.com.css"/>
   <%--FISHBONE--%>
-  <link rel="stylesheet" href="css/uploadButton.css" type="text/css" />
+  <link rel="stylesheet" href="css/uploadButton.css" type="text/css"/>
   <link rel="stylesheet" href="./css/canvasAdapt.css" type="text/css">
-  <link rel="stylesheet" href="./css/rightCSS.css" type="text/css" />
-  <link rel="stylesheet" href="./css/text.css" type="text/css" />
-  <link rel="stylesheet" href="./css/main.css" type="text/css" />
-  <link rel="stylesheet" href="./css/freezeRootNode.css" type="text/css" />
-  <link rel="stylesheet" href="./css/demo.css" type="text/css" />
-  <link rel="stylesheet" href="./css/zTreeStyle.css" type="text/css" />
+  <link rel="stylesheet" href="./css/rightCSS.css" type="text/css"/>
+  <link rel="stylesheet" href="./css/text.css" type="text/css"/>
+  <link rel="stylesheet" href="./css/main.css" type="text/css"/>
+  <link rel="stylesheet" href="./css/freezeRootNode.css" type="text/css"/>
+  <link rel="stylesheet" href="./css/demo.css" type="text/css"/>
+  <link rel="stylesheet" href="./css/zTreeStyle.css" type="text/css"/>
   <!-- 导入js -->
   <script type="text/javascript" src="js/cpexcel.js"></script>
   <script type="text/javascript" src="js/shim.js"></script>
@@ -72,11 +72,22 @@
       </ul>
     </div>
     <div class="tab-content">
+      <%--项目管理--%>
+
+      <div id="projectManagement" class="tab-pane active">
+        <div id="table-position">
+          <div class="btn-group btn-group-sm" style="padding-left: 15px;">
+            <button id="buttonNew" class="btn btn-success" data-toggle="modal" data-target="#newProjectModal">
+              <span class="menu-icon fa fa-folder"></span>新建项目
+            </button>
+          </div>
+          <%@include file="/appStyleJSP/jspf/tableData.jspf" %>
+        </div>
+      </div>
       <%--主功能区--%>
       <div id="mainFunction" class="tab-pane">
         <%@include file="/appStyleJSP/navigationBar/mainFunction.jspf" %>
       </div>
-      <%--项目管理--%>
       <%
         if (userInfo == null) {
           out.write("<style> " +
@@ -84,29 +95,18 @@
                 "{display:none}" +
                 "</style>");
           out.write("<script>" +
-                "console.log('demo');" +
                 "$('#mainFunction').addClass('active');" +
                 "$('#mainId').addClass('active');" +
                 "</script>");
         }
       %>
-      <div id="projectManagement" class="tab-pane active">
-        <div id="table-position">
-            <div class="btn-group btn-group-sm" style="padding-left: 15px;">
-              <button id="buttonNew" class="btn btn-success" data-toggle="modal" data-target="#newProjectModal">
-                <span class="menu-icon fa fa-folder"></span>新建项目
-              </button>
-          </div>
-          <%@include file="/appStyleJSP/jspf/tableData.jspf" %>
-        </div>
-      </div>
       <%--word编辑区--%>
       <div id="wordEdit" class="tab-pane">
-        <%@include file="/appStyleJSP/navigationBar/wordEdit.jspf"%>
+        <%@include file="/appStyleJSP/navigationBar/wordEdit.jspf" %>
       </div>
       <%--帮助文档--%>
       <div id="help" class="tab-pane">
-          <%@include file="/appStyleJSP/navigationBar/help.jspf" %>
+        <%@include file="/appStyleJSP/navigationBar/help.jspf" %>
       </div>
     </div>
   </div>
@@ -120,6 +120,7 @@
 <script type="text/javascript" src="jtopo/bone.js"></script>
 <script type="text/javascript" src="jtopo/drawing.js"></script>
 <script type="text/javascript" src="jtopo/tree.js"></script>
-<script type="text/javascript" src="./jtopo/popups.js"></script>
+<script type="text/javascript" src="./jtopo/exportFile.js"></script>
+<script type="text/javascript" src="./appStyleJS/sidebarAction.js"></script>
 </body>
 </html>
