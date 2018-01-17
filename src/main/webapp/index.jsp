@@ -4,6 +4,8 @@
 <%
   //  服务器路径
   String sourcePath = "http://innovation.xjtu.edu.cn/webresources/ace-master/assets";
+  //  本地路径
+//  String sourcePath = "assets";
 %>
 <html lang="en">
 <head>
@@ -17,6 +19,7 @@
   <link rel="stylesheet" href="<%=sourcePath%>/font-awesome/4.5.0/css/font-awesome.min.css"/>
   <link rel="stylesheet" href="<%=sourcePath%>/css/ace-rtl.min.css"/>
   <link rel="stylesheet" href="<%=sourcePath%>/css/ace-skins.min.css"/>
+  <link rel="stylesheet" href="<%=sourcePath%>/css/fonts.googleapis.com.css"/>
   <%--js--%>
   <script type="text/javascript" src="<%=sourcePath%>/js/ace-extra.min.js"></script>
   <script type="text/javascript" src="<%=sourcePath%>/js/jquery-2.1.4.min.js"></script>
@@ -32,7 +35,6 @@
   <script type="text/javascript" src="<%=sourcePath%>/js/jquery.flot.pie.min.js"></script>
   <script type="text/javascript" src="<%=sourcePath%>/js/jquery.flot.resize.min.js"></script>
   <script type="text/javascript" src="<%=sourcePath%>/js/ace-elements.min.js"></script>
-  <link rel="stylesheet" href="<%=sourcePath%>/css/fonts.googleapis.com.css"/>
   <%--FISHBONE--%>
   <link rel="stylesheet" href="css/uploadButton.css" type="text/css"/>
   <link rel="stylesheet" href="./css/canvasAdapt.css" type="text/css">
@@ -53,7 +55,8 @@
   <%--需要单独添加的js、css--%>
   <script type="text/javascript" src="./appStyleJS/buttonAction.js"></script>
   <script type="text/javascript" src="./appStyleJS/logout.js"></script>
-  <link rel="stylesheet" href="./appStyleCSS/TablePosition.css"/>
+  <script type="text/javascript" src="./appStyleJS/resultReport.js"></script>
+  <link rel="stylesheet" href="./appStyleCSS/Extra.css"/>
 </head>
 <body class="no-skin">
 <%@include file="appStyleJSP/jspf/banner.jspf" %>
@@ -110,8 +113,8 @@
       </div>
     </div>
   </div>
+  <%@include file="appStyleJSP/jspf/copyright.jspf" %>
 </div>
-<%@include file="appStyleJSP/jspf/copyright.jspf" %>
 <%@include file="appStyleJSP/jspf/modalFrame.jspf" %>
 <script type="text/javascript" src="js/tree/jquery.ztree.core.js"></script>
 <script type="text/javascript" src="js/tree/jquery.ztree.exedit.js"></script>
@@ -120,7 +123,8 @@
 <script type="text/javascript" src="jtopo/bone.js"></script>
 <script type="text/javascript" src="jtopo/drawing.js"></script>
 <script type="text/javascript" src="jtopo/tree.js"></script>
-<script type="text/javascript" src="./jtopo/exportFile.js"></script>
-<script type="text/javascript" src="./appStyleJS/sidebarAction.js"></script>
+<script type="text/javascript">
+    var userName = '<%=userInfo.get("username")%>';
+</script>
 </body>
 </html>

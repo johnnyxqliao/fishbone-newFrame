@@ -9,19 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 @WebServlet("/addProject")
 public class addProject extends HttpServlet {
    protected void doPost (HttpServletRequest request, HttpServletResponse response)
            throws ServletException, IOException {
       request.setCharacterEncoding("UTF-8");
-      String projectId = request.getParameter("projectId");
+      Integer projectNumber = Integer.valueOf(request.getParameter("projectNumber"));
       String projectTime = request.getParameter("projectTime");
       String projectName = request.getParameter("projectName");
       String projectRemark = request.getParameter("projectRemark");
-      String userName = request.getParameter("userName");
+      Map<String, String> userInfo = (Map<String, String>) request.getSession().getAttribute("userInfo");
+      String userName = userInfo.get("username");
       String result = request.getParameter("result");
-      FishboneEntity fishboneEntity = new FishboneEntity(Integer.valueOf(projectId), userName, projectTime, projectName, projectRemark, result);
+      String wordResult = request.getParameter("wordResult");
+      FishboneEntity fishboneEntity = new FishboneEntity(projectNumber, userName, projectTime, projectName, projectRemark, result, wordResult);
       DaoDB.insert(fishboneEntity);
       System.out.println("add" + fishboneEntity + "successful");
    }

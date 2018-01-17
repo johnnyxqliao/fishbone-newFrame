@@ -54,16 +54,9 @@
       <span class="glyphicon glyphicon-check"></span>保存
     </button>
 
-    <button type="button" class="btn btn-default btn-success" onclick="convertCanvasToImage()">
-    <span class="glyphicon glyphicon-share"></span>导出到word
-  </button>
-    <%--<button type="button" class="btn btn-default btn-success" onclick="exportFile()">--%>
-      <%--<span class="glyphicon glyphicon-share"></span>liao--%>
-    <%--</button>--%>
-    <%--<div id="chooseImportFile">--%>
-      <%--<input type="file" name="fileImport" id="fileImport"--%>
-             <%--onchange="importFile(this.files)" />--%>
-    <%--</div>--%>
+    <button type="button" class="btn btn-default btn-success" onclick="exportWord()">
+      <span class="glyphicon glyphicon-share"></span>导出到word
+    </button>
   </div>
 </div>
 <div id="canvasDiv">

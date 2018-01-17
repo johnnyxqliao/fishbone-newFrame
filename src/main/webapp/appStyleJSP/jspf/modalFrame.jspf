@@ -43,7 +43,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭
         </button>
-        <button type="button" class="btn btn-primary" onclick="removeProject();" id="deleteButton">
+        <button type="button" class="btn btn-primary" id="deleteModalButton">
           确认
         </button>
       </div>
@@ -222,25 +222,6 @@
         <button type="button" class="btn btn-default" data-dismiss="modal"
                 style="padding-top: 5px; padding-bottom: 5px; padding-right: 10px; padding-left: 10px;">
           取消</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- 不允许打开-->
-<div class="modal fade" id="sidebarHide" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header"
-           style="text-align: center; padding-top: 50px; padding-bottom: 50px; padding-left: 0px; padding-right: 0px;">
-        <h4 class="modal-title" id="myModalLabel2">
-          该节点不允许打开</br> 请点击查看项目。
-        </h4>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal"
-                style="padding-top: 5px; padding-bottom: 5px; padding-right: 10px; padding-left: 10px;">
-          确定</button>
       </div>
     </div>
   </div>

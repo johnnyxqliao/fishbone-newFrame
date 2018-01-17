@@ -8,14 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 @WebServlet("/removeProject")
 public class removeProject extends HttpServlet {
    protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String projectId = request.getParameter("counter");
-      String username = request.getParameter("username");
-      System.out.println("项目id是："+projectId+"用户名是："+username);
-      DaoDB.remove(Integer.valueOf(projectId),username);
+      String projectNumber = request.getParameter("projectNumber");
+//      Map<String, String> userInfo = (Map<String, String>) request.getSession().getAttribute("userInfo");
+//      String userName = userInfo.get("username");
+      System.out.println("项目id是："+projectNumber);
+      DaoDB.remove(Integer.valueOf(projectNumber));
    }
 
    protected void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

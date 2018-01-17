@@ -1,0 +1,52 @@
+
+#buttonNew {
+    margin-bottom: 10px;
+}
+
+.tab-content {
+    border: 0px;
+    margin: auto;
+}
+
+.helpClass {
+    margin: 0 auto;
+    width: 60%;
+}
+
+.helpP {
+    font-size: 16px;
+}
+
+#appHelp {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.wysiwyg-toolbar.btn-toolbar.center.wysiwyg-style2 {
+    height: 40px;
+}
+
+.wysiwyg-editor {
+    max-height: 700px;
+    height: 400px;
+}
+
+.main-content, body, html {
+    min-height: 80%
+}
+
+#main-container {
+    height: 80%;
+}
+
+#sidebar-sec {
+    height: 630px;
+}
+
+#sideTree {
+    height: 650px;
+}
+
+#treeDemo {
+    height: 650px;
+}

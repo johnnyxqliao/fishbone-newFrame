@@ -17,7 +17,7 @@ public class DaoDB {
    private static Transaction transaction;
    private static Gson gson = null;
 
-   private static void beginTransaction () {
+   private static void beginTransaction () {//可以修改
       sessionFactory = config.buildSessionFactory();
       session = sessionFactory.openSession();
       transaction = session.beginTransaction();
@@ -33,15 +33,12 @@ public class DaoDB {
       sessionFactory.close();
    }
 
-   public static void remove (Integer Id, String username) {//删除数据
+   public static void remove (Integer Id) {//删除数据
       System.out.println("开始删除");
       beginTransaction();
-//      FishboneEntity fishboneEntity = new FishboneEntity();
-//      fishboneEntity.setProjectId(id);
-      String hql = "from FishboneEntity where projectId=? and userName=?";
+      String hql = "from FishboneEntity where projectNumber=?";
       Query query = session.createQuery(hql);
       query.setString(0, String.valueOf(Id));
-      query.setString(1, username);
       List<FishboneEntity> fishboneEntity = query.list();
       session.delete(fishboneEntity.get(0));
       transaction.commit();
@@ -63,49 +60,40 @@ public class DaoDB {
       return gson.toJson(fishboneEntity);
    }
 
-   public static void modify (String username, Integer Id, String result) {
+   //修改数据
+   public static void modify (Integer Id, String result, String saveType) {
       beginTransaction();
-      System.out.println("开始修改");
-//      条件查询
-      String hql = "from FishboneEntity where projectId=? and userName=?";
+      String hql = "from FishboneEntity where projectNumber=?";
       Query query = session.createQuery(hql);
       query.setString(0, String.valueOf(Id));
-      query.setString(1, username);
       List<FishboneEntity> fishboneEntity = query.list();
 //      修改并更新数据
-      fishboneEntity.get(0).setResult(result);
+      if (saveType.equals("appData")) {
+         fishboneEntity.get(0).setResult(result);
+      } else {
+         fishboneEntity.get(0).setWordResult(result);
+      }
+
       session.update(fishboneEntity.get(0));
       transaction.commit();
       session.close();
       System.out.println("modify successful");
    }
 
-   public static String check (String username, Integer Id) {
+   public static String check (Integer Id) {
       beginTransaction();
       System.out.println("开始查询");
-//      条件查询
-      String hql = "from FishboneEntity where projectId=? and userName=?";
+      String hql = "from FishboneEntity where projectNumber=?";
       Query query = session.createQuery(hql);
       query.setString(0, String.valueOf(Id));
-      query.setString(1, username);
       List<FishboneEntity> fishboneEntity = query.list();
-//      修改并更新数据
       String checkData = fishboneEntity.get(0).getResult();
       transaction.commit();
       session.close();
-      System.out.println("check successful");
       return checkData;
    }
 
    public static void main (String[] args) {
-//   System.out.println("liaoxiaoqiang");
-//      FishboneEntity fishboneEntity = new FishboneEntity(1, "asd", "asdf", "asdf");
-//      insert(fishboneEntity);
-//      remove (4);
-//      query("from FishboneEntity fishboneEntity where userName="+"123");
-//      System.out.println(check ("123", 2));
-//      ;
-//      System.out.println("successful");
-      modify("123", 1, "asdfasd");
+//      FishboneEntity fishboneEntity = new FishboneEntity(1, "123", "asdf", "asd1f", "as2df", "asd3f", "a3sdf");
    }
 }

@@ -6,11 +6,152 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<html>
-<head>
-  <title>Title</title>
-</head>
-<body>
-word编辑区域
-</body>
-</html>
+<%--<h1>--%>
+<%--<button class="btn btn-success" onclick="getWordContext()">获取内容</button>--%>
+<%--</h1>--%>
+<div class="btn-group btn-group-sm">
+  <button id="buttonNew" class="btn btn-success" onclick="saveWord()">
+    <span class="glyphicon glyphicon-cloud"></span>保存Word
+  </button>
+</div>
+<div class="wysiwyg-toolbar btn-toolbar center wysiwyg-style2">
+  <!-- 标题 -->
+  <div class="btn-group">
+    <a class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font"
+       aria-expanded="false">
+      <i class=" ace-icon fa fa-header"></i>
+      <i class=" ace-icon fa fa-angle-down icon-on-right"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-light dropdown-caret">
+      <li>
+        <a data-edit="formatBlock H2" style="font-size:32px">标题一</a>
+      </li>
+      <li>
+        <a data-edit="formatBlock H3" style="font-size:22px">标题二</a>
+      </li>
+      <li>
+        <a data-edit="formatBlock H4" style="font-size:16px">标题三</a>
+      </li>
+      <li>
+        <a data-edit="formatBlock H5" style="font-size:12px">标题四</a>
+      </li>
+    </ul>
+  </div>
+  <!-- 字体 -->
+  <div class="btn-group">
+    <a class="btn dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font Size">
+      <i class=" ace-icon fa fa-text-height"></i>&nbsp;
+      <i class=" ace-icon fa fa-angle-down icon-on-right"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-light dropdown-caret">
+      <li>
+        <a data-edit="fontSize 1">
+          <font size="1">8</font>
+        </a>
+      </li>
+      <li>
+        <a data-edit="fontSize 2">
+          <font size="2">10</font>
+        </a>
+      </li>
+      <li>
+        <a data-edit="fontSize 3">
+          <font size="3">14</font>
+        </a>
+      </li>
+      <li>
+        <a data-edit="fontSize 4">
+          <font size="4">18</font>
+        </a>
+      </li>
+      <li>
+        <a data-edit="fontSize 5">
+          <font size="5">24</font>
+        </a>
+      </li>
+      <li>
+        <a data-edit="fontSize 6">
+          <font size="6">36</font>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- 加粗 斜体 删除线 下划线 -->
+  <div class="btn-group">
+    <a class="btn btn-sm btn-info" data-edit="bold" title="" data-original-title="Bold (Ctrl/Cmd+B)">
+      <i class=" ace-icon fa fa-bold"></i>
+    </a>
+    <a class="btn btn-sm btn-info" data-edit="italic" title="" data-original-title="Italic (Ctrl/Cmd+I)">
+      <i class=" ace-icon fa fa-italic"></i>
+    </a>
+    <a class="btn btn-sm btn-info" data-edit="strikethrough" title="" data-original-title="Strikethrough">
+      <i class=" ace-icon fa fa-strikethrough"></i>
+    </a>
+    <a class="btn btn-sm btn-info" data-edit="underline" title="" data-original-title="Underline">
+      <i class=" ace-icon fa fa-underline"></i>
+    </a>
+  </div>
+  <!-- 编号 -->
+  <div class="btn-group">
+    <a class="btn btn-sm btn-success" data-edit="insertunorderedlist" title="" data-original-title="Bullet list">
+      <i class=" ace-icon fa fa-list-ul"></i>
+    </a>
+    <a class="btn btn-sm btn-success" data-edit="insertorderedlist" title="" data-original-title="Number list">
+      <i class=" ace-icon fa fa-list-ol"></i>
+    </a>
+    <a class="btn btn-sm btn-purple" data-edit="outdent" title="" data-original-title="Reduce indent (Shift+Tab)">
+      <i class=" ace-icon fa fa-outdent"></i>
+    </a>
+    <a class="btn btn-sm btn-purple" data-edit="indent" title="" data-original-title="Indent (Tab)">
+      <i class=" ace-icon fa fa-indent"></i>
+    </a>
+  </div>
+  <!-- 对齐 -->
+  <div class="btn-group">
+    <a class="btn btn-sm btn-primary" data-edit="justifyleft" title="" data-original-title="Align Left (Ctrl/Cmd+L)">
+      <i class=" ace-icon fa fa-align-left"></i>
+    </a>
+    <a class="btn btn-sm btn-primary" data-edit="justifycenter" title="" data-original-title="Center (Ctrl/Cmd+E)">
+      <i class=" ace-icon fa fa-align-center"></i>
+    </a>
+    <a class="btn btn-sm btn-primary" data-edit="justifyright" title="" data-original-title="Align Right (Ctrl/Cmd+R)">
+      <i class=" ace-icon fa fa-align-right"></i>
+    </a>
+    <a class="btn btn-sm btn-inverse" data-edit="justifyfull" title="" data-original-title="Justify (Ctrl/Cmd+J)">
+      <i class=" ace-icon fa fa-align-justify"></i>
+    </a>
+  </div>
+  <!--  图片 -->
+  <div class="btn-group">
+    <a class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown" title=""
+       data-original-title="Insert picture">
+      <i class=" ace-icon fa fa-picture-o"></i>
+    </a>
+    <div class="dropdown-menu dropdown-caret dropdown-menu-right">
+      <div class="input-group">
+        <input class="form-control" placeholder="Image URL" type="text" data-editImage="insertImage">
+        <span class="input-group-btn">
+          <button class="btn btn-sm btn-primary" type="button">Insert</button>
+        </span>
+      </div>
+      <div class="space-2"></div>
+      <label class="center block no-margin-bottom">
+        <button class="btn btn-sm btn-success" type="button" id="Wyimage">
+          <i class=" ace-icon fa fa-file"></i>Choose Image …
+        </button>
+        <input type="file" data-editImage="insertImage" accept="image/*"/>
+      </label>
+    </div>
+  </div>
+  <!--  撤销 -->
+  <div class="btn-group">
+    <a class="btn btn-sm btn-grey" data-edit="undo" title="" data-original-title="Undo">
+      <i class=" ace-icon fa fa-undo"></i>
+    </a>
+    <a class="btn btn-sm btn-grey" data-edit="redo" title="" data-original-title="Redo">
+      <i class=" ace-icon fa fa-repeat"></i>
+    </a>
+  </div>
+</div>
+<div class="wysiwyg-editor" id="WYeditor" contenteditable="true">
+</div>

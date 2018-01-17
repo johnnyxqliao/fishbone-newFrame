@@ -8,17 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
 @WebServlet("/saveProject")
 public class saveProject extends HttpServlet {
    protected void doPost (HttpServletRequest request, HttpServletResponse response)
            throws ServletException, IOException {
       request.setCharacterEncoding("utf-8");
-      String username = request.getParameter("username");
-      String Id = request.getParameter("Id");
+      Integer projectNumber = Integer.valueOf(request.getParameter("projectNumber"));
       String exportData = request.getParameter("exportData");
-      System.out.println("项目数据为：" + exportData+"项目Id为：" + Id+"用户名是：" + username);
-      DaoDB.modify(username, Integer.valueOf(Id), exportData);
+      DaoDB.modify(projectNumber, exportData, "appData");
    }
 
    protected void doGet (HttpServletRequest request, HttpServletResponse response)
