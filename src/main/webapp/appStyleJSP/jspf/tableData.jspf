@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col-xs-12">
     <div class="table-header">
-      **项目管理
+      鱼骨图App项目管理
     </div>
     <div>
       <table id="dynamic-table" class="table table-striped table-bordered table-hover">
@@ -12,7 +12,7 @@
           <th id="projectName">项目名</th>
           <th id="projectTime">时间</th>
           <th id="projectRemark">备注</th>
-          <th></th>
+          <th>操作</th>
         </tr>
         </thead>
       </table>

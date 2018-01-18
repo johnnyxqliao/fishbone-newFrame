@@ -32,7 +32,7 @@
     <li class="active" id="projectManagementBar">
       <a data-toggle="tab" href="#projectManagement">
         <i class="menu-icon fa fa-cogs"></i>
-        <span class="menu-text">**项目管理</span>
+        <span class="menu-text">鱼骨图项目管理</span>
       </a>
       <b class="arrow"></b>
     </li>
@@ -46,7 +46,7 @@
     </li>
 
     <li id="wordEditBar">
-      <a data-toggle="tab" href="#wordEdit" id="wordEditBarA" style="pointer-events:none;">
+      <a data-toggle="tab" href="#wordEdit" id="wordEditBarA">
         <i class="menu-icon fa fa-pencil-square-o" id="wordExport"></i>
         <span class="menu-text">word编辑区</span>
       </a>

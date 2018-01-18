@@ -26,7 +26,7 @@ public class addProject extends HttpServlet {
       String wordResult = request.getParameter("wordResult");
       FishboneEntity fishboneEntity = new FishboneEntity(projectNumber, userName, projectTime, projectName, projectRemark, result, wordResult);
       DaoDB.insert(fishboneEntity);
-      System.out.println("add" + fishboneEntity + "successful");
+//      System.out.println("add" + fishboneEntity + "successful");
    }
 
    protected void doGet (HttpServletRequest request, HttpServletResponse response)

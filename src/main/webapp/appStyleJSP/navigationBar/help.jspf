@@ -8,11 +8,12 @@
   <div class="helpClass">
     <p class="helpP">
       <i class="ace-icon fa fa-check green"></i>
-    欢迎使用<strong class="green">**App</strong>, 使用流程如下：<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;1、首先*****<br>
-      <img src="http://innovation.xjtu.edu.cn/webresources/ace-master/assets/images/placeholder/530x270.png"/><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;2、其次*****<br>
-      <img src="http://innovation.xjtu.edu.cn/webresources/ace-master/assets/images/placeholder/530x270.png"/><br>
+    欢迎使用<strong class="green">鱼骨图App</strong>, 使用流程如下：<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;1、首先新建项目，然后通过点击查看，开始编辑项目<br>
+      <%--<img src="http://innovation.xjtu.edu.cn/webresources/ace-master/assets/images/placeholder/530x270.png"/><br>--%>
+      &nbsp;&nbsp;&nbsp;&nbsp;2、本webApp提供两种绘制方式，首先通过下载模板，在模板规定的地方填写鱼骨图内容，然后将表格导入，并点击绘制即可<br>
+      其次可以在左侧
+      <%--<img src="http://innovation.xjtu.edu.cn/webresources/ace-master/assets/images/placeholder/530x270.png"/><br>--%>
       &nbsp;&nbsp;&nbsp;&nbsp;3、最后*****<br>
       <img src="http://innovation.xjtu.edu.cn/webresources/ace-master/assets/images/placeholder/530x270.png"/><br>
     <p>

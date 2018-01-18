@@ -17,19 +17,21 @@ function setCustomContext() {
     title = "<h2> " + title + "</h2>";
     chap1 = "<h3>" + chap1 + "</h3>";
     chap2 = "<h3>" + chap2 + "</h3>";
-    // chap3 = "<h3>1.3 " + chap3 + "</h3>";
     editor.append(title, chap1, image1, chap2);
 }
 
-$('#wordEditBarA').click(function () {
-    $("#WYeditor").focus();  //定位光标到文本编辑区
-    bindToolbar(); //绑定toolbar
-    bindImageInsert(); //绑定插入图片按钮
-    initSelectionMarker(); //编辑区初始化鼠标事件
+$(document).ready(function () {
+    $('#wordEditBarA').click(function () {
+        $("#WYeditor").empty();
+        $("#WYeditor").focus();  //定位光标到文本编辑区
+        bindToolbar(); //绑定toolbar
+        bindImageInsert(); //绑定插入图片按钮
+        initSelectionMarker(); //编辑区初始化鼠标事件
+        setCustomContext();
+    });
 });
 
 var range; //全局变量，选择的文本范围或光标当前位置
-
 function bindToolbar() {
     var toolbar = $("a[data-edit]");
     //绑定点击事件

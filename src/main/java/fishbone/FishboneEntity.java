@@ -27,7 +27,7 @@ public class FishboneEntity {
    }
 
    @Id
-   @GeneratedValue(strategy=GenerationType.AUTO)
+   @GeneratedValue(strategy = GenerationType.AUTO)
    @Column(name = "projectNumber")
    public int getProjectNumber () {
       return projectNumber;

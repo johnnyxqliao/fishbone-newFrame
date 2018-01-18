@@ -5,17 +5,33 @@
 <hibernate-configuration>
    <session-factory>
       <!--<property name="connection.url">jdbc:mysql://115.154.191.2:3306/fishbone?-->
-         <!--useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false-->
+      <!--useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false-->
       <!--</property>-->
+      <!--数据库连接-->
       <property name="connection.url">jdbc:mysql://localhost:3306/fishbone?
-         useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false
-      </property>
+         useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false</property>
       <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
       <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
       <property name="connection.username">root</property>
       <property name="connection.password">19950425</property>
-      <!-- DB schema will be updated if needed -->
       <property name="hbm2ddl.auto">update</property>
+      <!--<property name="show_sql">true</property>-->
+      <!--<property name="format_sql">true</property>-->
+      <!--配置c3p0-->
+      <!--<property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>-->
+      <!--<property name="hibernate.c3p0.max_size">20</property>-->
+      <!--<property name="hibernate.c3p0.min_size">5</property>-->
+      <!--<property name="hibernate.c3p0.timeout">120</property>-->
+      <!--<property name="automaticTestTable">Test</property>-->
+      <!--<property name="hibernate.c3p0.max_statements">100</property>-->
+      <!--<property name="hibernate.c3p0.idle_test_period">120</property>-->
+      <!--<property name="hibernate.c3p0.acquire_increment">1</property>-->
+      <!--<property name="c3p0.testConnectionOnCheckout">true</property>-->
+      <!--<property name="c3p0.idleConnectionTestPeriod">18000</property>-->
+      <!--<property name="c3p0.maxIdleTime">25000</property>-->
+      <!--<property name="c3p0.idle_test_period">120</property>-->
+      <!--持久类映射-->
       <mapping class="fishbone.FishboneEntity"/>
+      <mapping class="fishbone.TemplateFishboneEntity"/>
    </session-factory>
 </hibernate-configuration>

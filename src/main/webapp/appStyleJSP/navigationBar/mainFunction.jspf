@@ -50,13 +50,13 @@
       <span class="glyphicon glyphicon-align-center"></span>居中
     </button>
 
-    <button type="button" class="btn btn-default btn-success" onclick="saveProject()" id="saveProject">
+    <button type="button" class="btn btn-default btn-success" onclick="updateOrSave()" id="saveProject">
       <span class="glyphicon glyphicon-check"></span>保存
     </button>
 
-    <button type="button" class="btn btn-default btn-success" onclick="exportWord()">
-      <span class="glyphicon glyphicon-share"></span>导出到word
-    </button>
+    <%--<button type="button" class="btn btn-default btn-success" onclick="exportWord()">--%>
+      <%--<span class="glyphicon glyphicon-share"></span>导出到word--%>
+    <%--</button>--%>
   </div>
 </div>
 <div id="canvasDiv">

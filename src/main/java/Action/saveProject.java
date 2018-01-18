@@ -17,7 +17,11 @@ public class saveProject extends HttpServlet {
       request.setCharacterEncoding("utf-8");
       Integer projectNumber = Integer.valueOf(request.getParameter("projectNumber"));
       String exportData = request.getParameter("exportData");
-      DaoDB.modify(projectNumber, exportData, "appData");
+      String tempId = request.getParameter("tempId");
+      DaoDB.modify(projectNumber, exportData, tempId, "appData");
+      if (0 != Integer.valueOf(tempId)) {//当前存在模板层项目Id,对模板项目和app项目进行绑定
+         DaoDB.updateTempTable(Integer.valueOf(tempId), projectNumber);
+      }
    }
 
    protected void doGet (HttpServletRequest request, HttpServletResponse response)

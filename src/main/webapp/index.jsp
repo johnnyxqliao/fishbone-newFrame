@@ -36,10 +36,7 @@
   <script type="text/javascript" src="<%=sourcePath%>/js/jquery.flot.resize.min.js"></script>
   <script type="text/javascript" src="<%=sourcePath%>/js/ace-elements.min.js"></script>
   <%--FISHBONE--%>
-  <link rel="stylesheet" href="css/uploadButton.css" type="text/css"/>
   <link rel="stylesheet" href="./css/canvasAdapt.css" type="text/css">
-  <link rel="stylesheet" href="./css/rightCSS.css" type="text/css"/>
-  <link rel="stylesheet" href="./css/text.css" type="text/css"/>
   <link rel="stylesheet" href="./css/main.css" type="text/css"/>
   <link rel="stylesheet" href="./css/freezeRootNode.css" type="text/css"/>
   <link rel="stylesheet" href="./css/demo.css" type="text/css"/>
@@ -71,12 +68,11 @@
           <i class="ace-icon fa fa-home home-icon"></i>
           <a href="#" style="font-weight: bold">创新方法工具平台</a>
         </li>
-        <li class="active">此处改为app名字</li>
+        <li class="active">鱼骨图</li>
       </ul>
     </div>
     <div class="tab-content">
       <%--项目管理--%>
-
       <div id="projectManagement" class="tab-pane active">
         <div id="table-position">
           <div class="btn-group btn-group-sm" style="padding-left: 15px;">
@@ -100,6 +96,7 @@
           out.write("<script>" +
                 "$('#mainFunction').addClass('active');" +
                 "$('#mainId').addClass('active');" +
+                "$('#mainIdA').css('pointer-events', 'auto');" +
                 "</script>");
         }
       %>

@@ -1,11 +1,12 @@
 // 定义初始参数
-var counter = 0;
 var curProjectNum;
 var projectName;
-
+var tempId = 0;
+var tempData;
+var fishboneIni = '["SHEET: Sheet1","","待解决问题,",",人员",",机器",",材料",",方法",",环境",",测量",""]';
 // 表格初始化
 $(document).ready(function () {
-    if (typeof userName !== 'object')
+    if (typeof userName !== 'object') {
         $('#dynamic-table').DataTable({
             language: {//表格汉化
                 "sProcessing": "处理中...",
@@ -54,6 +55,9 @@ $(document).ready(function () {
                      {"render": addButtonId}
                  ]
         });
+        // 通过模板层传递的id，查看是否存在相关数据
+        tempCheck();
+    }
 
     // 将数据按照顺序进行排列，序号不是项目的真实id
     $('#dynamic-table').DataTable().on('order.dt search.dt', function () {
@@ -66,6 +70,7 @@ $(document).ready(function () {
     }).draw();
 });
 
+// 按钮初始化函数
 function addButtonId(data, type, row, meta) {
     return '<div class="hidden-sm hidden-xs action-buttons">\n' +
          '              <a class="btn btn-xs btn-info" href="#">\n' +
@@ -110,6 +115,11 @@ function removeProject(index) {
 // 添加项目函数
 function addProject() {
     // 获取输入框中的内容
+    // JSON.stringify(exportData)
+    var fishData = fishboneIni;
+    if ($('#projectManagementBar')[0].className !== 'active') {
+        fishData = JSON.stringify(exportData);
+    }
     var projectName = $('#projectNameModal')[0].value;
     var projectTime = new Date().toLocaleDateString() + ',' + new Date().getHours() + ':' + new Date().getMinutes();
     var projectRemark = $('#projectRemarkModal')[0].value;
@@ -119,7 +129,7 @@ function addProject() {
         "projectName": projectName,
         "projectRemark": projectRemark,
         "userName": userName,
-        "result": '',
+        "result": fishData,
         "wordResult": ''
     };
     //表格添加数据
@@ -150,15 +160,15 @@ function addProject() {
 function saveProject() {
     var data = {
         "projectNumber": curProjectNum,
-        "exportData": JSON.stringify(exportData)
+        "exportData": JSON.stringify(exportData),
+        "tempId": tempId
     };
-    console.log("鱼骨图数据为：" + exportData);
     $.ajax({
         type: "post",
         url: "saveProject",
         data: data,
-        success: function (data) {
-            console.log("请求接收到的数据是：" + data);
+        success: function () {
+            alert("当前项目保存成功");
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log("XMLHttpRequest请求状态码：" + XMLHttpRequest.status);
@@ -169,11 +179,22 @@ function saveProject() {
     });
 }
 
+//更新还是保存函数
+function updateOrSave() {
+    if (tempId === 0) {//单纯的app项目，没有与模板层进行交互
+        saveProject();
+    } else if (tempId !== 0 && tempData === null) {//模板层项目，但是当前app项目为空
+        saveProject();
+    }else if(tempId !== 0 && tempData != null){//模板层项目，存在app项目
+        $('#chooseModal').modal('show');
+    }
+}
+
 // 查看项目
 function checkProject(index) {
     curProjectNum = index;
     var target = window.event.target;
-    projectName =$(target).parents("tr")[0].children[1].innerText;
+    projectName = $(target).parents("tr")[0].children[1].innerText;
     $("#main").trigger("click");
     $('#mainIdA').css('pointer-events', 'auto');
     $.ajax({
@@ -182,7 +203,7 @@ function checkProject(index) {
         data: {"projectNumber": index},
         success: function (data) {
             console.log("accept data successful");
-            if (data === "") {
+            if (data === fishboneIni) {
                 alert("这是一个新项目，尽情在canvas上发挥你的聪明才智吧！！！");
             } else {
                 frameLoad(JSON.parse(data));
@@ -210,25 +231,19 @@ function frameLoad(json) {
     redraw();
 }
 
-//导出到word
-function exportWord() {
-    $("#wordExport").trigger("click");
-    $('#wordEditBarA').css('pointer-events', 'auto');
-    getWordContext();
-}
-
 // 保存word
 function saveWord() {
     var data = {
         "projectNumber": curProjectNum,
-        "wordResult": $("#WYeditor").html()
+        "wordResult": $("#WYeditor").html(),
+        "tempId": tempId
     };
     $.ajax({
         type: "post",
         url: "saveResultReport",
         data: data,
         success: function () {
-            console.log("wordReport数据保存成功");
+            alert("当前word保存成功");
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log("XMLHttpRequest请求状态码：" + XMLHttpRequest.status);
@@ -237,4 +252,39 @@ function saveWord() {
             console.log("errorThrown是：" + errorThrown);
         }
     });
+}
+
+// 查看模板对应数据
+function tempCheck() {
+    var reg = new RegExp("(^|&)" + "DMAIC_tempId" + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+        tempId = unescape(r[2]);
+        // 在数据库中判断是否存在该id
+        $.ajax({
+            type: "post",
+            url: "checkTempProject",
+            data: {"tempProjectId": tempId},
+            success: function (data) {
+                if (data != null) {
+                    tempData = JSON.parse(data);
+                    projectName = tempData.projectName;
+                    $("#main").trigger("click");
+                    $('#mainIdA').css('pointer-events', 'auto');
+                    frameLoad(JSON.parse(tempData.result));
+                    exportData = JSON.parse(tempData.result);
+                    alert("亲，欢迎再次光临，继续对上次的项目进行修改吧！！！");
+                } else {
+                    tempData = null;
+                }
+                console.log("check tempData successful");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log("XMLHttpRequest请求状态码：" + XMLHttpRequest.status);
+                console.log("XMLHttpRequest状态码：" + XMLHttpRequest.readyState);
+                console.log("textStatus是：" + textStatus);
+                console.log("errorThrown是：" + errorThrown);
+            }
+        });
+    }
 }
