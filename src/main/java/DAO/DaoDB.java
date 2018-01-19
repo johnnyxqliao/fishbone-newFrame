@@ -88,6 +88,7 @@ public class DaoDB {
       String checkData = fishboneEntity.get(0).getResult();
       transaction.commit();
       session.close();
+//      System.out.println(checkData);
       return checkData;
    }
 
@@ -100,30 +101,44 @@ public class DaoDB {
       List<TemplateFishboneEntity> TemplateFishboneEntity = query.list();
       transaction.commit();
       session.close();
-      return gson.toJson(TemplateFishboneEntity.get(0).getFishboneEntity());
+      System.out.println("模板层id查询成功");
+      if (TemplateFishboneEntity.size() == 0) {
+         return null;
+      } else {
+         return gson.toJson(TemplateFishboneEntity.get(0).getFishboneEntity());
+      }
    }
 
    public static void updateTempTable (Integer tempProjectId, Integer Id) {//更新鱼骨图关联表
       beginTransaction();
       gson = new Gson();
-      String hql = "from TemplateFishboneEntity where tempProjectId=?";
-      Query query = session.createQuery(hql);
-      query.setString(0, String.valueOf(tempProjectId));
-      if (query.list() == null) {//关联表中没有该字段
-         session.save(new TemplateFishboneEntity(0, tempProjectId, session.get(FishboneEntity.class, Id)));
-      } else {//存在该字段，需要对关联表模板id绑定项目进行更新
-         Query queryId = session.createQuery("from TemplateFishboneEntity where tempProjectId=?");
-         queryId.setString(0, String.valueOf(tempProjectId));
-         session.delete(queryId.list().get(0));//将当前的记录删除，并根据当前条件添加新的记录
-         session.save(new TemplateFishboneEntity(0, tempProjectId, session.get(FishboneEntity.class, Id)));
+      // 根据模板层Id查询是否有相关记录
+      String hqlTemp = "from TemplateFishboneEntity where tempProjectId=?";
+      Query queryTemp = session.createQuery(hqlTemp);
+      queryTemp.setString(0, String.valueOf(tempProjectId));
+      queryTemp.list();
+      if (queryTemp.list().size() != 0) {//模板层id不为空。删除相关记录
+         session.delete(queryTemp.list().get(0));//将当前的记录删除，并根据当前条件添加新的记录
       }
+
+      // 根据AppId查询是否有相关记录
+      String hqlId = "from TemplateFishboneEntity where fishboneEntity.projectNumber=?";
+      Query queryAPP = session.createQuery(hqlId);
+      queryAPP.setString(0, String.valueOf(Id));
+      if (queryAPP.list().size() != 0) {//模板层id为空，AppId不为空
+         session.delete(queryAPP.list().get(0));//将当前的记录删除，并根据当前条件添加新的记录
+      }
+
+      // 新建一条绑定记录
+      session.save(new TemplateFishboneEntity(0, tempProjectId, session.get(FishboneEntity.class, Id)));
+      System.out.println("完成模板Id与app绑定");
       transaction.commit();
       session.close();
    }
 
    public static void main (String[] args) {
 //      FishboneEntity fishboneEntity = new FishboneEntity(1, "123", "asdf", "asd1f", "as2df", "asd3f", "a3sdf");
-      String aa = checkTempId(1);
-      System.out.println(aa);
+//      updateTempTable(4, 24);
+//      check(45);
    }
 }

@@ -183,9 +183,9 @@ function saveProject() {
 function updateOrSave() {
     if (tempId === 0) {//单纯的app项目，没有与模板层进行交互
         saveProject();
-    } else if (tempId !== 0 && tempData === null) {//模板层项目，但是当前app项目为空
+    } else if (tempId !== 0 && tempData === 'null') {//模板层项目，但是当前app项目为空
         saveProject();
-    }else if(tempId !== 0 && tempData != null){//模板层项目，存在app项目
+    }else if(tempId !== 0 && tempData !== 'null'){//模板层项目，存在app项目
         $('#chooseModal').modal('show');
     }
 }
@@ -266,7 +266,7 @@ function tempCheck() {
             url: "checkTempProject",
             data: {"tempProjectId": tempId},
             success: function (data) {
-                if (data != null) {
+                if (data !== 'null') {
                     tempData = JSON.parse(data);
                     projectName = tempData.projectName;
                     $("#main").trigger("click");

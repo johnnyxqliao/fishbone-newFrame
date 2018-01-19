@@ -10,7 +10,6 @@ import javax.persistence.*;
 public class TemplateFishboneEntity {
    private int id;
    private Integer tempProjectId;
-   //   private Integer projectNumber;
    private FishboneEntity fishboneEntity;
 
    public TemplateFishboneEntity () {
@@ -57,17 +56,6 @@ public class TemplateFishboneEntity {
       this.tempProjectId = tempProjectId;
    }
 
-//   @Basic
-//
-//   @Column(name = "projectNumber")
-//   public Integer getProjectNumber () {
-//      return projectNumber;
-//   }
-//
-//   public void setProjectNumber (Integer projectNumber) {
-//      this.projectNumber = projectNumber;
-//   }
-
    @Override
    public boolean equals (Object o) {
       if (this == o) return true;
@@ -75,18 +63,13 @@ public class TemplateFishboneEntity {
 
       TemplateFishboneEntity that = (TemplateFishboneEntity) o;
 
-      if (id != that.id) return false;
-      if (tempProjectId != null ? !tempProjectId.equals(that.tempProjectId) : that.tempProjectId != null) return false;
-//      if (projectNumber != null ? !projectNumber.equals(that.projectNumber) : that.projectNumber != null) return false;
-
-      return true;
+      return id == that.id && (tempProjectId != null ? tempProjectId.equals(that.tempProjectId) : that.tempProjectId == null);
    }
 
    @Override
    public int hashCode () {
       int result = id;
       result = 31 * result + (tempProjectId != null ? tempProjectId.hashCode() : 0);
-//      result = 31 * result + (projectNumber != null ? projectNumber.hashCode() : 0);
       return result;
    }
 }
