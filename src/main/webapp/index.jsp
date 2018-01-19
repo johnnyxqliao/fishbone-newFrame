@@ -52,6 +52,7 @@
   <%--需要单独添加的js、css--%>
   <script type="text/javascript" src="./appStyleJS/buttonAction.js"></script>
   <script type="text/javascript" src="./appStyleJS/logout.js"></script>
+  <%--<script type="text/javascript" src="/webresources/js/common/logout.js"></script>--%>
   <script type="text/javascript" src="./appStyleJS/resultReport.js"></script>
   <link rel="stylesheet" href="./appStyleCSS/Extra.css"/>
 </head>

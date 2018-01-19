@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 
 @WebServlet("/addProject")
@@ -25,8 +26,8 @@ public class addProject extends HttpServlet {
       String result = request.getParameter("result");
       String wordResult = request.getParameter("wordResult");
       FishboneEntity fishboneEntity = new FishboneEntity(projectNumber, userName, projectTime, projectName, projectRemark, result, wordResult);
-      DaoDB.insert(fishboneEntity);
-//      System.out.println("add" + fishboneEntity + "successful");
+      PrintWriter out = response.getWriter();
+      out.print(DaoDB.insert(fishboneEntity));
    }
 
    protected void doGet (HttpServletRequest request, HttpServletResponse response)

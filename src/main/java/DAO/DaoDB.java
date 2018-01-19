@@ -24,14 +24,17 @@ public class DaoDB {
       transaction = session.beginTransaction();
    }
 
-   public static void insert (FishboneEntity fishboneEntity) {//插入数据
+   public static Integer insert (FishboneEntity fishboneEntity) {//插入数据
       beginTransaction();
       System.out.println("执行了一次插入操作");
       session.save(fishboneEntity);
+      //获取当前添加id
+      List<FishboneEntity> FishboneEntitylist = session.createQuery("from FishboneEntity as o order by o.projectNumber").list();
+      Integer projectNumber = FishboneEntitylist.get(FishboneEntitylist.size()-1).getProjectNumber();
       transaction.commit();
-      System.out.println("事务提交");
       session.close();
       sessionFactory.close();
+      return projectNumber;
    }
 
    public static void remove (Integer Id) {//删除数据
@@ -44,6 +47,7 @@ public class DaoDB {
       session.delete(fishboneEntity.get(0));
       transaction.commit();
       session.close();
+      sessionFactory.close();
       System.out.println("删除成功");
    }
 
@@ -57,6 +61,7 @@ public class DaoDB {
       List<FishboneEntity> fishboneEntity = query.list();
       transaction.commit();
       session.close();
+      sessionFactory.close();
       System.out.println("查询结果是：" + gson.toJson(fishboneEntity));
       return gson.toJson(fishboneEntity);
    }
@@ -75,6 +80,7 @@ public class DaoDB {
       session.update(fishboneEntity.get(0));
       transaction.commit();
       session.close();
+      sessionFactory.close();
       System.out.println("modify successful");
    }
 
@@ -88,6 +94,7 @@ public class DaoDB {
       String checkData = fishboneEntity.get(0).getResult();
       transaction.commit();
       session.close();
+      sessionFactory.close();
 //      System.out.println(checkData);
       return checkData;
    }
@@ -101,6 +108,7 @@ public class DaoDB {
       List<TemplateFishboneEntity> TemplateFishboneEntity = query.list();
       transaction.commit();
       session.close();
+      sessionFactory.close();
       System.out.println("模板层id查询成功");
       if (TemplateFishboneEntity.size() == 0) {
          return null;
@@ -137,8 +145,14 @@ public class DaoDB {
    }
 
    public static void main (String[] args) {
-//      FishboneEntity fishboneEntity = new FishboneEntity(1, "123", "asdf", "asd1f", "as2df", "asd3f", "a3sdf");
+      FishboneEntity fishboneEntity = new FishboneEntity(1, "123", "asd1", "asd1f", "as2df", "asd3f", "a3sdf");
 //      updateTempTable(4, 24);
 //      check(45);
+      System.out.println(insert(fishboneEntity));
+//      String hql = "select max(route.rouId) from RouteEntity as route";
+//      Query query = (int)query("select max(FishboneEntity.projectNumber) from FishboneEntity").uniqueResult();
+//      int maxid = (int)query.uniqueResult();
+//      return maxid;
+//      query("123");
    }
 }

@@ -115,9 +115,8 @@ function removeProject(index) {
 // 添加项目函数
 function addProject() {
     // 获取输入框中的内容
-    // JSON.stringify(exportData)
     var fishData = fishboneIni;
-    if ($('#projectManagementBar')[0].className !== 'active') {
+    if ($('#projectManagementBar')[0].className !== 'active') {//判断新建类型，以及传送数据方式
         fishData = JSON.stringify(exportData);
     }
     var projectName = $('#projectNameModal')[0].value;
@@ -141,9 +140,11 @@ function addProject() {
             type: "post",
             url: "addProject",
             data: data,
-            success: function () {
+            success: function (maxId) {
                 console.log("add data successful");
-                window.location.reload(true);
+                data['projectNumber'] = maxId;
+                $('#dynamic-table').DataTable().row.add(data).draw(false);
+                // window.location.reload(true);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 console.log("XMLHttpRequest请求状态码：" + XMLHttpRequest.status);
@@ -153,6 +154,7 @@ function addProject() {
             }
         });
         $('#newProjectModal').modal('hide');
+        // 在前台添加表格
     }
 }
 
